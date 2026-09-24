@@ -1,0 +1,159 @@
+<!--
+  Title: The Game Parlor — Mini Crossword
+  Author: April Yang
+  Description: crossword.html — CSS-only 6x6 crossword (CS5610 Project 1)
+  Styles: shared in style.css
+  Note: No JavaScript. Each white square is a single-character <input>.
+        Black squares are <div class="cell block">. Answers overlay each
+        cell as a hidden <span class="answer aN dN"> carrying a class for
+        its Across word (aN) and Down word (dN). Two reveal mechanisms,
+        both pure CSS via :has():
+          * "Reveal all answers" — one checkbox shows every answer.
+          * per-clue "hint" — each clue has its own checkbox that shows
+            only that word's cells.
+        Every checkbox is wrapped in its <label>, so no id/for is needed.
+        Theme: Seattle. Marquee answers EAGLE / BAY / GRAY; the rest of the
+        local flavor lives in the clues.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Crossword — April's Game Parlor</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR (same on every page) ================= -->
+    <header class="site-header">
+      <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="./index.html">April's Game Parlor</a>
+        <ul class="nav-list">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./crossword.html" aria-current="page">Crossword</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Mini Crossword</h1>
+      <p class="puzzle-intro">
+        A little six-by-six with a Seattle streak &mdash; the Across and Down
+        answers are all different. Click a square and type a letter. Stuck on
+        one word? Tap its <em>hint</em> to reveal just that answer, or flip
+        <em>Reveal all answers</em> to show the whole grid. No scripts here,
+        just HTML and CSS.
+      </p>
+
+      <!-- ================= PUZZLE ================= -->
+      <section class="puzzle" aria-label="Crossword puzzle">
+        <h2 class="sr-only">Puzzle grid</h2>
+
+        <!-- global reveal: label WRAPS the checkbox, so no id/for needed -->
+        <label class="reveal-all-label">
+          <input type="checkbox" class="reveal-all" /> Reveal all answers
+        </label>
+
+        <div class="board">
+          <!-- Row 1 -->
+          <div class="cell block" aria-hidden="true"></div>
+          <div class="cell"><span class="num">1</span><input maxlength="1" aria-label="Row 1, column 2" /><span class="answer a1">C</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 1, column 3" /><span class="answer a1">L</span></div>
+          <div class="cell"><span class="num">2</span><input maxlength="1" aria-label="Row 1, column 4" /><span class="answer a1 d2">O</span></div>
+          <div class="cell"><span class="num">3</span><input maxlength="1" aria-label="Row 1, column 5" /><span class="answer a1 d3">T</span></div>
+          <div class="cell"><span class="num">4</span><input maxlength="1" aria-label="Row 1, column 6" /><span class="answer a1 d4">H</span></div>
+          <!-- Row 2 -->
+          <div class="cell"><span class="num">5</span><input maxlength="1" aria-label="Row 2, column 1" /><span class="answer d5">E</span></div>
+          <div class="cell block" aria-hidden="true"></div>
+          <div class="cell block" aria-hidden="true"></div>
+          <div class="cell"><span class="num">6</span><input maxlength="1" aria-label="Row 2, column 4" /><span class="answer a6 d2">B</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 2, column 5" /><span class="answer a6 d3">A</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 2, column 6" /><span class="answer a6 d4">Y</span></div>
+          <!-- Row 3 -->
+          <div class="cell"><input maxlength="1" aria-label="Row 3, column 1" /><span class="answer d5">A</span></div>
+          <div class="cell block" aria-hidden="true"></div>
+          <div class="cell"><span class="num">7</span><input maxlength="1" aria-label="Row 3, column 3" /><span class="answer a7 d7">M</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 3, column 4" /><span class="answer a7 d2">E</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 3, column 5" /><span class="answer a7 d3">R</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 3, column 6" /><span class="answer a7 d4">E</span></div>
+          <!-- Row 4 -->
+          <div class="cell"><span class="num">8</span><input maxlength="1" aria-label="Row 4, column 1" /><span class="answer a8 d5">G</span></div>
+          <div class="cell"><span class="num">9</span><input maxlength="1" aria-label="Row 4, column 2" /><span class="answer a8 d9">R</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 4, column 3" /><span class="answer a8 d7">A</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 4, column 4" /><span class="answer a8 d2">Y</span></div>
+          <div class="cell block" aria-hidden="true"></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 4, column 6" /><span class="answer d4">N</span></div>
+          <!-- Row 5 -->
+          <div class="cell"><span class="num">10</span><input maxlength="1" aria-label="Row 5, column 1" /><span class="answer a10 d5">L</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 5, column 2" /><span class="answer a10 d9">A</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 5, column 3" /><span class="answer a10 d7">D</span></div>
+          <div class="cell block" aria-hidden="true"></div>
+          <div class="cell block" aria-hidden="true"></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 5, column 6" /><span class="answer d4">A</span></div>
+          <!-- Row 6 -->
+          <div class="cell"><span class="num">11</span><input maxlength="1" aria-label="Row 6, column 1" /><span class="answer a11 d5">E</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 6, column 2" /><span class="answer a11 d9">N</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 6, column 3" /><span class="answer a11 d7">E</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 6, column 4" /><span class="answer a11">M</span></div>
+          <div class="cell"><input maxlength="1" aria-label="Row 6, column 5" /><span class="answer a11">Y</span></div>
+          <div class="cell block" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <!-- ================= CLUES ================= -->
+      <section class="clues" aria-label="Clues">
+        <div>
+          <h2>Across</h2>
+          <ul>
+            <li><span class="cnum">1</span>What you'll keep handy to wipe drizzle off your glasses<label class="reveal-word"><input type="checkbox" class="reveal-mini toggle-a1" /><span class="reveal-word-text">hint</span></label></li>
+            <li><span class="cnum">6</span>Elliott ___, the water Seattle curls around<label class="reveal-word"><input type="checkbox" class="reveal-mini toggle-a6" /><span class="reveal-word-text">hint</span></label></li>
+            <li><span class="cnum">7</span>Nothing but; a ___ sprinkle, locals shrug<label class="reveal-word"><input type="checkbox" class="reveal-mini toggle-a7" /><span class="reveal-word-text">hint</span></label></li>
+            <li><span class="cnum">8</span>The sky's factory setting here, October through June<label class="reveal-word"><input type="checkbox" class="reveal-mini toggle-a8" /><span class="reveal-word-text">hint</span></label></li>
+            <li><span class="cnum">10</span>Young chap<label class="reveal-word"><input type="checkbox" class="reveal-mini toggle-a10" /><span class="reveal-word-text">hint</span></label></li>
+            <li><span class="cnum">11</span>Foe (or, to a local, a whole week of direct sun)<label class="reveal-word"><input type="checkbox" class="reveal-mini toggle-a11" /><span class="reveal-word-text">hint</span></label></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Down</h2>
+          <ul>
+            <li><span class="cnum">2</span>Heed — as drivers do for jaywalkers downtown<label class="reveal-word"><input type="checkbox" class="reveal-mini toggle-d2" /><span class="reveal-word-text">hint</span></label></li>
+            <li><span class="cnum">3</span>Road-sealing black stuff<label class="reveal-word"><input type="checkbox" class="reveal-mini toggle-d3" /><span class="reveal-word-text">hint</span></label></li>
+            <li><span class="cnum">4</span>Cackling Woodland Park Zoo resident<label class="reveal-word"><input type="checkbox" class="reveal-mini toggle-d4" /><span class="reveal-word-text">hint</span></label></li>
+            <li><span class="cnum">5</span>Bald raptor riding thermals over Puget Sound<label class="reveal-word"><input type="checkbox" class="reveal-mini toggle-d5" /><span class="reveal-word-text">hint</span></label></li>
+            <li><span class="cnum">7</span>Manufactured; “___ in Washington”<label class="reveal-word"><input type="checkbox" class="reveal-mini toggle-d7" /><span class="reveal-word-text">hint</span></label></li>
+            <li><span class="cnum">9</span>Jogged the Burke-Gilman, say<label class="reveal-word"><input type="checkbox" class="reveal-mini toggle-d9" /><span class="reveal-word-text">hint</span></label></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER (same on every page) ================= -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p class="copyright">&copy; 2026 April Yang</p>
+        <ul class="social">
+          <li>
+            <a href="https://github.com/aprilyanggarwood" target="_blank" rel="noopener">
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener">
+              LinkedIn
+            </a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>

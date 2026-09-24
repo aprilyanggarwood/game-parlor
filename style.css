@@ -1,0 +1,635 @@
+/* ============================================================
+   The Game Parlor — shared stylesheet
+   Author: April Yang
+   Used by: index.html, crossword.html, about.html, contact.html
+   ============================================================ */
+
+/* ============================================================
+   DESIGN TOKENS — defined once, reused everywhere
+   (Project 1 requires custom properties for colors + spacing)
+   ============================================================ */
+:root {
+  /* created palette, tuned for 4.5:1 contrast */
+  --olive: #4e5e07;         /* olive — accents, borders, grid */
+  --olive-deep: #3a4605;    /* deeper olive */
+  --gold: #e19d29;     /* yellow-brown — wordmark, on the dark plaque */
+  --plaque: #2b2a13;   /* dark backing so gold text clears 4.5:1 */
+  --cream: #eee8d0;          /* card surface */
+  --paper: #fbf8f0;          /* page background */
+  --ink: #000000;            /* body text — black */
+  --ink-soft: #5a4f63;       /* secondary text */
+  --white: #ffffff;
+
+  /* spacing scale */
+  --sp-1: 0.5rem;
+  --sp-2: 1rem;
+  --sp-3: 1.5rem;
+  --sp-4: 2.5rem;
+  --sp-5: 4rem;
+
+  /* type */
+  --font-head: "Libre Baskerville", Georgia, serif;
+  --font-play: "Edu SA Beginner", "Comic Sans MS", cursive;
+
+  --radius: 8px;
+  --line: 3px solid var(--olive);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-head);
+  color: var(--ink);
+  background-color: var(--paper);
+  line-height: 1.65;
+}
+
+/* ============================================================
+   NAVBAR — sticky, semantic <nav><ul><li><a>, keyboard-friendly.
+   ============================================================ */
+.site-header {
+  position: sticky;   /* stays put on scroll, doesn't cover content */
+  top: 0;
+  z-index: 50;
+  background-color: var(--olive);
+  border-bottom: 4px solid var(--gold);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--sp-1) var(--sp-2);
+  display: flex;              /* FLEXBOX */
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gold);
+  background: var(--plaque);
+  border: 1px solid var(--gold);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.brand:hover {
+  background: #1c1b0c;
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;              /* FLEXBOX */
+  gap: var(--sp-1);
+  flex-wrap: wrap;
+}
+
+.nav-list a {
+  position: relative;
+  display: block;
+  padding: 0.6rem 0.9rem;     /* comfortable 44px+ tap target */
+  min-height: 44px;
+  color: var(--white);
+  font-family: var(--font-head);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+/* animated underline via PSEUDO-ELEMENT + TRANSFORM */
+.nav-list a::after {
+  content: "";
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.35rem;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+.nav-list a:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-list a:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* current page indicator */
+.nav-list a[aria-current="page"] {
+  background-color: var(--gold);
+  color: var(--plaque);
+  font-weight: 600;
+}
+.nav-list a[aria-current="page"]::after {
+  transform: scaleX(1);
+  background: var(--plaque);
+}
+
+/* visible keyboard focus everywhere */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--olive-deep);
+  outline-offset: 2px;
+}
+.site-header a:focus-visible {
+  outline-color: var(--white);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+main {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  flex: 1 0 auto;
+  padding: var(--sp-5) var(--sp-2) var(--sp-4);
+}
+
+.hero {
+  display: grid;                          /* GRID */
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--sp-4);
+  align-items: center;
+  margin-bottom: var(--sp-5);
+}
+
+.eyebrow {
+  font-family: var(--font-play);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.8rem;
+  color: var(--olive-deep);
+  margin: 0 0 var(--sp-1);
+}
+
+.hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  line-height: 1.1;
+  margin: 0 0 var(--sp-2);
+  color: var(--ink);
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: var(--ink);
+  max-width: 46ch;                         /* readable line length */
+  margin: 0 0 var(--sp-3);
+}
+
+.cta {
+  display: inline-block;
+  font-family: var(--font-head);
+  font-weight: 600;
+  background-color: var(--olive);
+  color: var(--white);
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  min-height: 44px;
+  border-radius: var(--radius);
+  border: 2px solid var(--olive);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+.cta:hover {
+  background-color: var(--gold);
+  color: var(--plaque);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+.cta:active {
+  transform: translateY(0);
+}
+
+/* four mini game "screens" — one hint per game, decorative */
+.hero-screens {
+  display: grid;                          /* GRID */
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-2);
+  width: min(340px, 100%);
+  margin-left: auto;
+}
+.screen {
+  aspect-ratio: 1;
+  background: var(--white);
+  border: 3px solid var(--olive);
+  border-radius: 12px;
+  padding: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--olive);
+}
+.screen svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ============================================================
+   GAMES — responsive GRID of cabinets
+   ============================================================ */
+.games h2 {
+  font-family: var(--font-head);
+  font-size: 1.9rem;
+  color: var(--ink);
+  border-bottom: var(--line);
+  padding-bottom: var(--sp-1);
+  margin-bottom: var(--sp-3);
+}
+
+.cabinet-grid {
+  display: grid;                          /* GRID */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--sp-3);
+}
+
+.cabinet {
+  background-color: var(--cream);
+  border: 2px solid var(--olive);
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 0 1px var(--olive);
+  padding: var(--sp-3);
+  display: flex;                          /* FLEXBOX */
+  flex-direction: column;
+  gap: var(--sp-1);
+  min-height: 220px;
+}
+
+.cabinet h3 {
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  margin: 0;
+  color: var(--ink);
+}
+
+.cabinet p {
+  margin: 0;
+  color: var(--ink);
+  flex-grow: 1;
+}
+
+.tag {
+  align-self: flex-start;
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+}
+.tag.live {
+  background: var(--olive-deep);
+  color: var(--cream);
+}
+.tag.soon {
+  background: transparent;
+  color: var(--olive-deep);
+  border: 1px solid var(--olive-deep);
+}
+
+/* the live cabinet is a real link — lifts on hover/focus */
+a.cabinet {
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+a.cabinet:hover,
+a.cabinet:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 0 var(--olive-deep);
+}
+
+.cabinet.locked {
+  opacity: 0.7;
+  border-style: dashed;
+}
+
+.play-label {
+  align-self: flex-start;
+  font-family: var(--font-play);
+  font-weight: 600;
+  color: var(--gold);
+  background: var(--plaque);
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+}
+
+/* ============================================================
+   FOOTER - site footer styles, shared across all pages.
+   ============================================================ */
+.site-footer {
+  background-color: var(--olive);
+  color: var(--white);
+  margin-top: var(--sp-5);
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--sp-3) var(--sp-2);
+  display: flex;                          /* FLEXBOX */
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+.copyright {
+  font-family: var(--font-head);
+  margin: 0;
+}
+.social {
+  list-style: none;
+  display: flex;
+  gap: var(--sp-1);
+  margin: 0;
+  padding: 0;
+}
+.social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0.4rem 0.7rem;
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.18s ease;
+}
+.social a:hover {
+  background-color: var(--gold);
+  color: var(--plaque);
+}
+
+/* ============================================================
+   RESPONSIVE — @media
+   ============================================================ */
+@media (max-width: 720px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-screens {
+    margin: 0 auto;
+  }
+  .nav-inner {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   CROSSWORD PAGE (crossword.html)
+   ============================================================ */
+.puzzle-intro {
+  max-width: 60ch;
+  margin-bottom: var(--sp-3);
+}
+
+/* ---- reveal controls ---------------------------------------- */
+/* global "reveal all" toggle, sits above the board */
+.reveal-all-label {
+  font-family: var(--font-head);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 0 0.7rem;
+  border: 2px solid var(--olive);
+  border-radius: var(--radius);
+  background: var(--cream);
+  color: var(--ink);
+}
+.reveal-all {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--olive);
+  cursor: pointer;
+}
+
+/* the grid — GRID (6 x 6) */
+.board {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  width: min(420px, 100%);
+  margin-top: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+
+.cell {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--white);
+  border: 2px solid var(--olive);
+  border-radius: 3px;
+  transition: box-shadow 0.12s ease, transform 0.12s ease, background 0.12s ease;
+}
+
+/* black squares — no input inside */
+.cell.block {
+  background: var(--olive);
+  border-color: var(--olive-deep);
+}
+
+/* small clue number in the corner — cream chip keeps it legible on both
+   the white square and the dark answer overlay when revealed */
+.cell .num {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  z-index: 2;
+  padding: 0 2px;
+  border-radius: 2px;
+  background: var(--cream);
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.6rem;
+  line-height: 1.2;
+  color: var(--olive-deep);
+  pointer-events: none;
+  transition: color 0.12s ease, transform 0.12s ease;
+}
+
+/* the typeable letter box */
+.cell input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--ink);
+  border-radius: 3px;
+}
+.cell input:focus {
+  outline: none;
+}
+
+/* ACTIVE-CELL HIGHLIGHT — make the focused square and its number pop.
+   :focus-within lets the wrapping .cell react while its <input> has focus. */
+.cell:focus-within {
+  background: #f6efcf;
+  border-color: var(--olive-deep);
+  box-shadow: 0 0 0 3px var(--gold), 0 4px 10px rgba(0, 0, 0, 0.22);
+  transform: scale(1.06);
+  z-index: 3;
+}
+.cell:focus-within .num {
+  transform: scale(1.35);
+  transform-origin: top left;
+}
+/* stronger ring for keyboard users */
+.cell input:focus-visible {
+  outline: 3px solid var(--olive-deep);
+  outline-offset: -3px;
+}
+
+/* the answer overlay, hidden until revealed */
+.cell .answer {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--gold);
+  background: var(--plaque);
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* GLOBAL reveal — the "reveal all" checkbox shows every answer */
+main:has(.reveal-all:checked) .answer {
+  display: flex;
+}
+
+/* PER-WORD reveal — each clue's "hint" checkbox shows only its own word.
+   Cells carry a class per Across word (aN) and per Down word (dN). */
+main:has(.toggle-a1:checked) .answer.a1 { display: flex; }
+main:has(.toggle-a6:checked) .answer.a6 { display: flex; }
+main:has(.toggle-a7:checked) .answer.a7 { display: flex; }
+main:has(.toggle-a8:checked) .answer.a8 { display: flex; }
+main:has(.toggle-a10:checked) .answer.a10 { display: flex; }
+main:has(.toggle-a11:checked) .answer.a11 { display: flex; }
+main:has(.toggle-d2:checked) .answer.d2 { display: flex; }
+main:has(.toggle-d3:checked) .answer.d3 { display: flex; }
+main:has(.toggle-d4:checked) .answer.d4 { display: flex; }
+main:has(.toggle-d5:checked) .answer.d5 { display: flex; }
+main:has(.toggle-d7:checked) .answer.d7 { display: flex; }
+main:has(.toggle-d9:checked) .answer.d9 { display: flex; }
+
+/* clue lists */
+.clues {
+  display: grid;                 /* GRID */
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-4);
+}
+.clues h2 {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  color: var(--ink);
+  border-bottom: var(--line);
+  padding-bottom: var(--sp-1);
+  margin: 0 0 var(--sp-2);
+}
+.clues ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.clues li {
+  margin-bottom: var(--sp-1);
+  display: flex;
+  align-items: baseline;
+  gap: 0.15rem;
+  flex-wrap: wrap;
+}
+.clues .cnum {
+  font-family: var(--font-head);
+  font-weight: 700;
+  color: var(--olive-deep);
+  margin-right: 0.3rem;
+}
+
+/* per-word "hint" toggle at the end of each clue */
+.reveal-word {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-height: 44px;             /* keeps a comfortable tap target */
+  padding: 0 0.5rem;
+  cursor: pointer;
+  font-family: var(--font-play);
+  font-size: 0.9rem;
+  color: var(--olive-deep);
+}
+.reveal-word:hover .reveal-word-text {
+  text-decoration: underline;
+}
+.reveal-mini {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--olive);
+  cursor: pointer;
+}
+.reveal-word-text {
+  user-select: none;
+}
+
+@media (max-width: 560px) {
+  .clues {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* screen-reader-only helper (visually hidden, still announced) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
