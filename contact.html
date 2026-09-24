@@ -1,0 +1,139 @@
+<!--
+  Title: The Game Parlor — Contact
+  Author: April Yang
+  Description: contact.html — Contact page (CS5610 Project 1)
+  Styles: shared in style.css
+  Note: CSS-only contact form. The <form action="mailto:..."> makes the
+        submit button open the visitor's own mail app (no JavaScript).
+        Contact links each have an inline-SVG icon in front (icons are
+        decorative, so aria-hidden). Inputs are wrapped in their <label>,
+        so no id/for is needed.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — April's Game Parlor</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome 6 (icon files) — used for the contact icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR (same on every page) ================= -->
+    <header class="site-header">
+      <nav class="nav-inner" aria-label="Main navigation">
+        <a class="brand" href="./index.html">April's Game Parlor</a>
+        <ul class="nav-list">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./crossword.html">Crossword</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Contact</h1>
+      <p class="lead">
+        Questions about the parlor, or just want to say hello? Reach me at any
+        of the links below, or send a note straight from this page.
+      </p>
+
+      <div class="contact-layout">
+        <!-- ================= DIRECT LINKS (icon in front) ================= -->
+        <section class="contact-info" aria-label="Contact details">
+          <h2>Reach me directly</h2>
+          <ul class="contact-list">
+            <li>
+              <a href="mailto:aprilyanggarwood@gmail.com" aria-label="Email April at aprilyanggarwood at gmail dot com">
+                <span class="contact-icon">
+                  <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                </span>
+                <span class="contact-text">aprilyanggarwood@gmail.com</span>
+              </a>
+            </li>
+            <li>
+              <a href="tel:+14252097335" aria-label="Call April at 4 2 5, 2 0 9, 7 3 3 5">
+                <span class="contact-icon">
+                  <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                </span>
+                <span class="contact-text">425-209-7335</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/aprilyanggarwood" target="_blank" rel="noopener" aria-label="April's GitHub profile">
+                <span class="contact-icon">
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </span>
+                <span class="contact-text">GitHub</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/ying-april-yang-a9bb8720/" target="_blank" rel="noopener" aria-label="April's LinkedIn profile">
+                <span class="contact-icon">
+                  <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+                </span>
+                <span class="contact-text">LinkedIn</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- ================= MESSAGE FORM ================= -->
+        <section class="contact-form-section" aria-label="Send a message">
+          <h2>Send a message</h2>
+          <form class="contact-form" action="mailto:aprilyanggarwood@gmail.com" method="post" enctype="text/plain">
+            <label class="field">
+              <span class="field-label">Your name</span>
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label class="field">
+              <span class="field-label">Your email</span>
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label class="field">
+              <span class="field-label">Message</span>
+              <textarea name="message" required></textarea>
+            </label>
+            <button type="submit" class="cta">Send message</button>
+            <p class="form-note">
+              Submitting opens your own email app with the message ready to send
+              to April.
+            </p>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <!-- ================= FOOTER (same on every page) ================= -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p class="copyright">&copy; 2026 April Yang</p>
+        <ul class="social">
+          <li>
+            <a href="https://github.com/aprilyanggarwood" target="_blank" rel="noopener">
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/ying-april-yang-a9bb8720/" target="_blank" rel="noopener">
+              LinkedIn
+            </a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>

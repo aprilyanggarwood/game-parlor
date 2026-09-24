@@ -621,6 +621,225 @@ main:has(.toggle-d9:checked) .answer.d9 { display: flex; }
   }
 }
 
+/* ============================================================
+   ABOUT PAGE (about.html)
+   ============================================================ */
+.about-intro {
+  display: grid;                          /* GRID */
+  grid-template-columns: minmax(220px, 300px) 1fr;
+  gap: var(--sp-4);
+  align-items: start;
+  margin-bottom: var(--sp-5);
+}
+.portrait {
+  margin: 0;
+}
+.portrait img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 3px solid var(--olive);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 0 var(--olive-deep);
+}
+.bio h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  margin: 0 0 var(--sp-2);
+  color: var(--ink);
+}
+.bio p {
+  font-size: 1.08rem;
+  color: var(--ink);
+  max-width: 60ch;
+  margin: 0 0 var(--sp-2);
+}
+
+/* photo strip */
+.gallery h2 {
+  font-family: var(--font-head);
+  font-size: 1.9rem;
+  color: var(--ink);
+  border-bottom: var(--line);
+  padding-bottom: var(--sp-1);
+  margin-bottom: var(--sp-3);
+}
+.photo-strip {
+  display: grid;                          /* GRID */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--sp-3);
+}
+.photo-strip figure {
+  margin: 0;
+  background: var(--cream);
+  border: 2px solid var(--olive);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;                          /* FLEXBOX */
+  flex-direction: column;
+}
+.photo-strip img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 2px solid var(--olive);
+}
+.photo-strip figcaption {
+  padding: var(--sp-1) var(--sp-2);
+  font-family: var(--font-play);
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+@media (max-width: 720px) {
+  .about-intro {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .portrait {
+    max-width: 260px;
+  }
+}
+
+/* ============================================================
+   CONTACT PAGE (contact.html)
+   ============================================================ */
+.lead {
+  max-width: 60ch;
+  font-size: 1.08rem;
+  color: var(--ink);
+  margin: 0 0 var(--sp-4);
+}
+
+.contact-layout {
+  display: grid;                          /* GRID */
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--sp-4);
+  align-items: start;
+}
+
+.contact-info h2,
+.contact-form-section h2 {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  color: var(--ink);
+  border-bottom: var(--line);
+  padding-bottom: var(--sp-1);
+  margin: 0 0 var(--sp-2);
+}
+
+/* direct-contact links, each with an icon in front */
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;                          /* FLEXBOX */
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+.contact-list a {
+  display: flex;                          /* FLEXBOX */
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--radius);
+  color: var(--ink);
+  text-decoration: none;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.contact-list a:hover,
+.contact-list a:focus-visible {
+  background: var(--cream);
+  transform: translateX(3px);
+}
+.contact-icon {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--olive);
+  color: var(--white);
+  border-radius: 50%;
+}
+.contact-icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+.contact-icon i {
+  font-size: 18px;
+  line-height: 1;
+}
+.contact-text {
+  font-family: var(--font-head);
+  word-break: break-word;
+}
+
+/* the message form */
+.contact-form {
+  display: flex;                          /* FLEXBOX */
+  flex-direction: column;
+  gap: var(--sp-2);
+  background: var(--cream);
+  border: 2px solid var(--olive);
+  border-radius: var(--radius);
+  padding: var(--sp-3);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.field-label {
+  font-family: var(--font-head);
+  font-weight: 700;
+  color: var(--ink);
+}
+.field input,
+.field textarea {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--white);
+  border: 2px solid var(--olive);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.7rem;
+  min-height: 44px;
+  width: 100%;
+}
+.field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: 3px solid var(--olive-deep);
+  outline-offset: 1px;
+  border-color: var(--olive-deep);
+}
+/* submit button reuses the .cta look; here it's a real <button> */
+.contact-form button.cta {
+  cursor: pointer;
+  align-self: flex-start;
+  font-size: 1rem;
+}
+.form-note {
+  font-size: 0.85rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* screen-reader-only helper (visually hidden, still announced) */
 .sr-only {
   position: absolute;
