@@ -74,7 +74,7 @@ game-parlor/
 ├── contact.html
 ├── style.css          # one shared stylesheet for all pages
 ├── images/            # About-page photos
-│   ├── april-portrait.jpg
+│   ├── red-van-coast.jpg      # background of the About hero
 │   ├── purple-flowers.jpg
 │   ├── yellow-tulips.jpg
 │   └── mountains-from-plane.jpg
